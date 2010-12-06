@@ -1,0 +1,5 @@
+Makefile.common
+Makefile.common.in
+config.log
+config.status
+
