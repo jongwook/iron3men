@@ -2,4 +2,11 @@ Makefile.common
 Makefile.common.in
 config.log
 config.status
+Release
+Release+Profile
+lib/sample/Release
+lib/sample/Release+Profile
+tools/sample/Release
+tools/sample/Release+Profile
+
 
