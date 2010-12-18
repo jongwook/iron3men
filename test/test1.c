@@ -13,7 +13,8 @@ int main()
 	for (i=0; i<2000000000; i++) {
 		x++;
 		z++;
-		if (i<1999999999)
+		if (i<1499999999)
+//		if (i<1999999999)
 		{
 			x++;
 			z++;
@@ -33,7 +34,7 @@ int main()
 		  k=1;
 			x++;
 		}
-		switch(i)
+		switch(i%20)
 		{
 			case 1:
 				x++;
@@ -43,7 +44,7 @@ int main()
 			default:
 				z=z+k;
 				k=3;
-				if (i<1999999999)
+				if (i<1499999999)
 				{
 					x=x+k;
 					z++;

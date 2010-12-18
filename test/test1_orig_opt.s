@@ -13,68 +13,78 @@ main:                                   # @main
 	xorl	%esi, %esi
 	call	clock
 	movl	%eax, 16(%esp)          # 4-byte Spill
-	movl	%esi, %eax
 	movl	%esi, %ecx
-	movl	%esi, %edx
+	movl	%esi, %edi
+	movl	%esi, %ebx
 	movl	$1, %ebp
 	.align	16, 0x90
 .LBB0_1:                                # %bb
                                         # =>This Inner Loop Header: Depth=1
-	cmpl	$200000000, %esi        # imm = 0xBEBC200
-	setg	%bl
-	movzbl	%bl, %edi
-	movl	%edi, 28(%esp)          # 4-byte Spill
-	addl	%edi, %edx
-	leal	2(%eax), %ebx
-	cmpl	$1999999999, %esi       # imm = 0x773593FF
-	cmovgel	%eax, %ebx
-	setl	%al
-	movzbl	%al, %eax
-	addl	%eax, %ecx
-	xorl	$1, %edi
-	movl	%edi, 20(%esp)          # 4-byte Spill
-	leal	1(%edi,%ecx), %ecx
-	movl	%ecx, 32(%esp)          # 4-byte Spill
-	xorl	$1, %eax
+	movl	%esi, %eax
+	movl	$1717986919, %edx       # imm = 0x66666667
+	imull	%edx
+	movl	%edx, %eax
+	shrl	$31, %eax
+	sarl	$3, %edx
 	addl	%eax, %edx
-	cmpl	$1, %esi
+	imull	$20, %edx, %eax
+	movl	%esi, %edx
+	subl	%eax, %edx
+	leal	2(%ecx), %eax
+	cmpl	$1499999999, %esi       # imm = 0x59682EFF
+	cmovgel	%ecx, %eax
+	setl	%cl
+	movzbl	%cl, %ecx
+	movl	%ecx, 32(%esp)          # 4-byte Spill
+	addl	%ecx, %edi
+	cmpl	$200000000, %esi        # imm = 0xBEBC200
+	setg	%cl
+	movzbl	%cl, %ecx
+	movl	%ecx, 28(%esp)          # 4-byte Spill
+	addl	%ecx, %ebx
+	xorl	$1, 32(%esp)            # 4-byte Folded Spill
+	addl	32(%esp), %ebx          # 4-byte Folded Reload
+	xorl	$1, %ecx
+	movl	%ecx, 20(%esp)          # 4-byte Spill
+	cmpl	$1, %edx
+	leal	1(%ecx,%edi), %ecx
 	je	.LBB0_3
 # BB#2:                                 # %bb
                                         #   in Loop: Header=BB0_1 Depth=1
-	movl	28(%esp), %ecx          # 4-byte Reload
-	leal	1(%ecx,%ecx), %ecx
-	movl	%ecx, 24(%esp)          # 4-byte Spill
-	cmpl	$2, %esi
+	movl	28(%esp), %edi          # 4-byte Reload
+	leal	1(%edi,%edi), %edi
+	movl	%edi, 24(%esp)          # 4-byte Spill
+	cmpl	$2, %edx
 	je	.LBB0_4
 	jmp	.LBB0_5
 .LBB0_3:                                # %bb7
                                         #   in Loop: Header=BB0_1 Depth=1
-	incl	32(%esp)                # 4-byte Folded Spill
+	incl	%ecx
 	movl	$3, 24(%esp)            # 4-byte Folded Spill
 .LBB0_4:                                # %bb8
                                         #   in Loop: Header=BB0_1 Depth=1
-	incl	%edx
+	incl	%ebx
 .LBB0_5:                                # %bb9
                                         #   in Loop: Header=BB0_1 Depth=1
+	leal	3(%ecx), %edi
+	cmpl	$1499999999, %esi       # imm = 0x59682EFF
+	movl	$-1, %edx
+	cmovll	%ebp, %edx
+	cmovgel	%ecx, %edi
+	addl	20(%esp), %edi          # 4-byte Folded Reload
+	addl	%edx, %eax
+	addl	24(%esp), %eax          # 4-byte Folded Reload
 	movl	32(%esp), %ecx          # 4-byte Reload
-	leal	3(%ecx), %ecx
-	cmpl	$1999999999, %esi       # imm = 0x773593FF
-	movl	$-1, %edi
-	cmovll	%ebp, %edi
-	cmovgel	32(%esp), %ecx          # 4-byte Folded Reload
-	addl	20(%esp), %ecx          # 4-byte Folded Reload
-	addl	%edi, %ebx
-	addl	24(%esp), %ebx          # 4-byte Folded Reload
-	addl	28(%esp), %eax          # 4-byte Folded Reload
-	addl	%eax, %edx
+	addl	28(%esp), %ecx          # 4-byte Folded Reload
+	addl	%ecx, %ebx
 	incl	%esi
 	cmpl	$2000000000, %esi       # imm = 0x77359400
-	movl	%ebx, %eax
+	movl	%eax, %ecx
 	jne	.LBB0_1
 # BB#6:                                 # %bb17
-	movl	%ebx, 12(%esp)
-	movl	%edx, 8(%esp)
-	movl	%ecx, 4(%esp)
+	movl	%eax, 12(%esp)
+	movl	%ebx, 8(%esp)
+	movl	%edi, 4(%esp)
 	movl	$.L.str, (%esp)
 	call	printf
 	movl	$10, (%esp)

@@ -14,8 +14,8 @@ llvm-dis < $1_final.bc > $1_final.ll
 ##g++ -O3 -o $1.profile $1.profile.s ../Release+Profile/lib/libiron3men.so
 #llvm-prof $1.bc llvmprof.out
 
-opt -f -die -adce -correlated-propagation -dse $1_final.bc -o $1_final_opt.bc
-opt -f -die -adce -correlated-propagation -dse $1.bc -o $1_orig_opt.bc
+opt -f -globaldce -globalopt -die -adce -correlated-propagation -dse -indvars -loop-unroll -loopsimplify -loop-reduce $1_final.bc -o $1_final_opt.bc
+opt -f -globaldce -globalopt -die -adce -correlated-propagation -dse -indvars -loop-unroll -loopsimplify -loop-reduce $1.bc -o $1_orig_opt.bc
 llvm-dis < $1_final_opt.bc > $1_final_opt.ll
 llvm-dis < $1_orig_opt.bc > $1_orig_opt.ll
 

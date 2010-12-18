@@ -11,11 +11,11 @@ bb.nph:
   br label %bb
 
 bb:                                               ; preds = %bb9, %bb.nph
-  %1 = phi i32 [ 0, %bb.nph ], [ %13, %bb9 ]
+  %1 = phi i32 [ 0, %bb.nph ], [ %14, %bb9 ]
   %z.021 = phi i32 [ 0, %bb.nph ], [ %z.2, %bb9 ]
   %x.020 = phi i32 [ 0, %bb.nph ], [ %x.6, %bb9 ]
   %y.119 = phi i32 [ 0, %bb.nph ], [ %y.5, %bb9 ]
-  %2 = icmp slt i32 %1, 1999999999
+  %2 = icmp slt i32 %1, 1499999999
   %3 = add nsw i32 %z.021, 2
   %4 = zext i1 %2 to i32
   %5 = xor i32 %4, 1
@@ -29,44 +29,48 @@ bb:                                               ; preds = %bb9, %bb.nph
   %x.1 = add i32 %x.1.v, %x.020
   %x.2 = add i32 %x.1, %8
   %k.0 = select i1 %6, i32 3, i32 1
-  switch i32 %1, label %bb9 [
+  %9 = srem i32 %1, 20
+  switch i32 %9, label %bb9 [
     i32 1, label %bb7
     i32 2, label %bb8
   ]
 
 bb7:                                              ; preds = %bb
-  %9 = add nsw i32 %x.2, 1
+  %10 = add nsw i32 %x.2, 1
   br label %bb8
 
 bb8:                                              ; preds = %bb7, %bb
-  %x.3 = phi i32 [ %x.2, %bb ], [ %9, %bb7 ]
+  %x.3 = phi i32 [ %x.2, %bb ], [ %10, %bb7 ]
   %k.2 = phi i32 [ %k.0, %bb ], [ 3, %bb7 ]
-  %10 = add nsw i32 %y.2, 1
+  %11 = add nsw i32 %y.2, 1
   br label %bb9
 
 bb9:                                              ; preds = %bb8, %bb
-  %y.3 = phi i32 [ %y.2, %bb ], [ %10, %bb8 ]
+  %y.3 = phi i32 [ %y.2, %bb ], [ %11, %bb8 ]
   %x.4 = phi i32 [ %x.2, %bb ], [ %x.3, %bb8 ]
   %k.3 = phi i32 [ %k.0, %bb ], [ %k.2, %bb8 ]
-  %11 = add nsw i32 %x.4, 3
-  %x.5 = select i1 %2, i32 %11, i32 %x.4
+  %12 = add nsw i32 %x.4, 3
+  %x.5 = select i1 %2, i32 %12, i32 %x.4
   %z.2.v = select i1 %2, i32 1, i32 -1
-  %12 = add nsw i32 %z.1, %z.2.v
-  %z.2 = add i32 %12, %k.3
+  %13 = add nsw i32 %z.1, %z.2.v
+  %z.2 = add i32 %13, %k.3
   %y.4 = add i32 %5, %7
   %y.5 = add i32 %y.4, %y.3
   %x.6 = add i32 %x.5, %8
-  %13 = add nsw i32 %1, 1
-  %exitcond = icmp eq i32 %13, 2000000000
-  br i1 %exitcond, label %bb17, label %bb
+  %14 = add nsw i32 %1, 1
+  %exitcond1 = icmp eq i32 2000000000, %14
+  br i1 %exitcond1, label %bb17, label %bb
 
 bb17:                                             ; preds = %bb9
-  %14 = tail call i32 (i8*, ...)* @printf(i8* noalias getelementptr inbounds ([10 x i8]* @.str, i32 0, i32 0), i32 %x.6, i32 %y.5, i32 %z.2) nounwind
-  %15 = tail call i32 @putchar(i32 10) nounwind
-  %16 = tail call i32 @clock() nounwind
-  %17 = sub nsw i32 %16, %0
-  %18 = sdiv i32 %17, 1000
-  %19 = tail call i32 (i8*, ...)* @printf(i8* noalias getelementptr inbounds ([5 x i8]* @.str1, i32 0, i32 0), i32 %18) nounwind
+  %x.6.lcssa = phi i32 [ %x.6, %bb9 ]
+  %y.5.lcssa = phi i32 [ %y.5, %bb9 ]
+  %z.2.lcssa = phi i32 [ %z.2, %bb9 ]
+  %15 = tail call i32 (i8*, ...)* @printf(i8* noalias getelementptr inbounds ([10 x i8]* @.str, i32 0, i32 0), i32 %x.6.lcssa, i32 %y.5.lcssa, i32 %z.2.lcssa) nounwind
+  %16 = tail call i32 @putchar(i32 10) nounwind
+  %17 = tail call i32 @clock() nounwind
+  %18 = sub nsw i32 %17, %0
+  %19 = sdiv i32 %18, 1000
+  %20 = tail call i32 (i8*, ...)* @printf(i8* noalias getelementptr inbounds ([5 x i8]* @.str1, i32 0, i32 0), i32 %19) nounwind
   ret i32 undef
 }
 
