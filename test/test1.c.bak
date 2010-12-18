@@ -1,0 +1,67 @@
+#include <stdio.h>
+
+int main()
+{
+	int x = 0;
+	int y = 0;
+	int z = 0;
+	int k = 3;
+	int i;
+	for (i=0; i<100; i++) {
+		x++;
+		z++;
+		if (i<99)
+		{
+			x++;
+			z++;
+		}
+		else
+		{
+			y++;
+			z--;
+		}
+		
+		if (i > 10)
+		{
+			y++;
+		}
+		else
+		{
+		  k=1;
+			x++;
+		}
+		switch(i)
+		{
+			case 1:
+				x++;
+				k = 3;
+			case 2:
+				y++;
+			default:
+				z=z+k;
+				k=3;
+				if (i<99)
+				{
+					x=x+k;
+					z++;
+				}
+				else
+				{
+					y++;
+					z--;
+				}
+				
+				if (i > 10)
+				{
+					y++;
+				}
+				else
+				{
+					x++;
+				}
+		}
+		printf("%d %d %d ",x,y,z);
+	}
+	printf("\n");
+	
+}
