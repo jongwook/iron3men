@@ -13,11 +13,8 @@ main:                                   # @main
 	movl	$.L.str, (%esp)
 	call	__isoc99_scanf
 	movl	16(%esp), %eax
-	movl	12(%esp), %ecx
-	leal	(%ecx,%eax,2), %edx
-	imull	%ecx, %edx
+	addl	12(%esp), %eax
 	imull	%eax, %eax
-	addl	%edx, %eax
 	movl	%eax, 4(%esp)
 	movl	$.L.str1, (%esp)
 	call	printf
@@ -34,8 +31,8 @@ main:                                   # @main
 
 	.type	.L.str1,@object         # @.str1
 .L.str1:
-	.asciz	 "%d"
-	.size	.L.str1, 3
+	.asciz	 "%d\n"
+	.size	.L.str1, 4
 
 
 	.section	.note.GNU-stack,"",@progbits

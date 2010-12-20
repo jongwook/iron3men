@@ -3,7 +3,7 @@ target datalayout = "e-p:32:32:32-i1:8:8-i8:8:8-i16:16:16-i32:32:32-i64:32:64-f3
 target triple = "i386-pc-linux-gnu"
 
 @.str = private constant [6 x i8] c"%d %d\00", align 1
-@.str1 = private constant [3 x i8] c"%d\00", align 1
+@.str1 = private constant [4 x i8] c"%d\0A\00", align 1
 
 define i32 @main(i32 %argc, i8** nocapture %argv) nounwind {
 entry:
@@ -17,7 +17,7 @@ entry:
   %tmp = add i32 %4, %3
   %tmp2 = mul i32 %tmp, %3
   %5 = add nsw i32 %tmp2, %2
-  %6 = call i32 (i8*, ...)* @printf(i8* noalias getelementptr inbounds ([3 x i8]* @.str1, i32 0, i32 0), i32 %5) nounwind
+  %6 = call i32 (i8*, ...)* @printf(i8* noalias getelementptr inbounds ([4 x i8]* @.str1, i32 0, i32 0), i32 %5) nounwind
   ret i32 undef
 }
 
