@@ -66,6 +66,10 @@ void Polynomial::init(const SmallFunction::Node *node) {
 	if(node->opcode != -1) {
 		Polynomial one(node->op1);
 		Polynomial other(node->op2);
+		if(one.invalid || other.invalid) {
+			invalid=true;
+			return;
+		}
 		switch (node->opcode) {
 			case 8:	// add
 				initWithAddition(one, other);
@@ -76,6 +80,16 @@ void Polynomial::init(const SmallFunction::Node *node) {
 				break;
 			case 12: // mul
 				initWithProduct(one, other);
+				break;
+			case 20: // shl
+				if(other.terms.size()==1 && other.terms[0]->vars.size()==0) {
+					// const shift left : convert to multiply
+					int factor = 1 << other.terms[0]->coef;
+					one *= factor;
+					initWithAddition(one, Polynomial());
+				} else {
+					invalid = true;
+				}
 				break;
 			default:
 				invalid = true;
